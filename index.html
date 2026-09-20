@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="A Casa do Celular — assistência técnica especializada em celulares e smartphones em Caçapava-SP."/>
+<meta name="theme-color" content="#00236f"/>
+
+<meta property="og:type" content="business.business"/>
+<meta property="og:title" content="A Casa do Celular | Assistência Técnica em Caçapava-SP"/>
+<meta property="og:description" content="Diagnóstico gratuito, peças homologadas e garantia de até 1 ano."/>
+<meta property="og:locale" content="pt_BR"/>
+<link rel="canonical" href="https://www.casadocelularcacapava.com.br/"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+
+<style>
+  :root {
+    --blue: #00236f;
+    --blue-mid: #1e3a8a;
+    --cyan: #38bdf8;
+    --cyan-soft: #acedff;
+    --whatsapp: #25d366;
+    --whatsapp-hover: #1ebe5b;
+    --black: #0a0a0a;
+    --dark: #0b1c30;
+    --surface: #f8f9ff;
+    --surface-2: #eff4ff;
+    --text: #ffffff;
+    --text-muted: #b7c8de;
+  }
+
+  html, body { box-sizing: border-box; padding: 0; margin: 0; scroll-behavior: smooth; }
+  body {
+    font-family: 'Kumbh Sans', sans-serif;
+    font-weight: 300;
+    background-color: var(--black);
+    color: var(--text);
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  h1, h2, h3, h4 { font-family: 'Kumbh Sans', sans-serif; margin: 0; line-height: 1.1; }
+  h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; }
+  h2 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; }
+  h3 { font-size: clamp(1.2rem, 2.2vw, 1.6rem); font-weight: 700; }
+  a { text-decoration: none; color: inherit; }
+  .container { width: 90%; max-width: 1240px; margin: auto; }
+
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--blue-mid); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 6px; }
+
+  /* ============================================================
+     HEADER
+     ============================================================ */
+  .site-header {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 999;
+    padding: 14px 0;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+  }
+  .site-header.scrolled {
+    background: rgba(10, 10, 10, 0.88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 4px 30px rgba(0, 35, 111, 0.35);
+  }
+  .site-header__inner {
+    width: min(92%, 1240px); height: 60px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  .site-brand { display: flex; align-items: center; flex: 0 0 auto; z-index: 1002; }
+  .site-brand img { display: block; height: 48px; width: auto; max-width: 220px; object-fit: contain; filter: brightness(0) invert(1); }
+  
+  .site-nav { display: none; align-items: center; justify-content: center; gap: 24px; flex: 1; }
+  @media (min-width: 1024px) { .site-nav { display: flex; } }
+  .site-nav a {
+    position: relative; color: #fff; font-size: 0.88rem; font-weight: 500;
+    opacity: 0.85; transition: color 0.2s ease, opacity 0.2s ease;
+  }
+  .site-nav a:after {
+    content: ""; position: absolute; left: 0; bottom: -6px;
+    width: 0; height: 2px; border-radius: 10px; background: var(--cyan);
+    transition: width 0.25s ease;
+  }
+  .site-nav a:hover { opacity: 1; color: var(--cyan); }
+  .site-nav a:hover:after { width: 100%; }
+
+  .site-header__actions { display: flex; align-items: center; gap: 12px; }
+  .site-header__cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: 999px;
+    background: var(--whatsapp); color: #062b13;
+    font-size: 0.85rem; font-weight: 700;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.25);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .site-header__cta:hover { background: var(--whatsapp-hover); transform: translateY(-2px); }
+
+  /* ============================================================
+     MENU CIRCULAR INTERATIVO — RODA COM MOUSE OU DEDO
+     ============================================================ */
+  .circle-menu-overlay {
+    position: fixed; inset: 0;
+    background: rgba(5, 10, 20, 0.72);
+    backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
+    z-index: 1000; opacity: 0; pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  body.circle-menu-active .circle-menu-overlay {
+    opacity: 1; pointer-events: auto;
+  }
+
+  /* O menu continua ancorado no canto inferior direito */
+  .circular-menu-hub {
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+    z-index: 1010;
+    width: 64px;
+    height: 64px;
+  }
+
+  .circle-trigger {
+    position: absolute;
+    left: 0; top: 0;
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--blue) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 35, 111, 0.6), 0 0 24px rgba(56, 189, 248, 0.4);
+    color: #fff; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.35s ease, box-shadow 0.3s ease;
+    z-index: 1015; outline: none;
+  }
+  .circle-trigger:hover {
+    transform: scale(1.08);
+    box-shadow: 0 14px 40px rgba(56, 189, 248, 0.5);
+  }
+  .circle-trigger .icon-box { position: relative; width: 26px; height: 26px; }
+  .circle-trigger .material-symbols-outlined {
+    position: absolute; inset: 0; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 26px;
+    transition: transform 0.35s ease, opacity 0.25s ease;
+  }
+  .circle-trigger .icon-close { opacity: 0; transform: rotate(-90deg) scale(0.5); }
+  .circle-trigger .icon-open { opacity: 1; transform: rotate(0deg) scale(1); }
+
+  .circle-aura {
+    position: absolute; left: -6px; top: -6px;
+    width: 76px; height: 76px; border-radius: 50%;
+    border: 2px solid rgba(56, 189, 248, 0.5);
+    pointer-events: none; animation: auraPulse 2.4s ease-out infinite;
+    z-index: 1009; opacity: 0.8;
+  }
+  body.circle-menu-active .circle-aura { display: none; }
+
+  @keyframes auraPulse {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    50% { transform: scale(1.35); opacity: 0.15; }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+
+  body.circle-menu-active .circle-trigger {
+    background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 30px rgba(239, 68, 68, 0.5);
+    transform: rotate(90deg);
+  }
+  body.circle-menu-active .circle-trigger .icon-open {
+    opacity: 0; transform: rotate(90deg) scale(0.5);
+  }
+  body.circle-menu-active .circle-trigger .icon-close {
+    opacity: 1; transform: rotate(0deg) scale(1);
+  }
+
+  /* A roda ocupa o espaço ao redor do botão central */
+  .circle-menu-items {
+    position: absolute;
+    left: 32px; top: 32px;
+    width: 1px; height: 1px;
+    pointer-events: none;
+    list-style: none; margin: 0; padding: 0;
+    z-index: 1011;
+    touch-action: none;
+  }
+
+  .circle-node {
+    --radius: 245px;
+    --angle: 0deg;
+    position: absolute;
+    left: 0; top: 0;
+    width: 88px; height: 88px;
+    margin: 0; border-radius: 50%;
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--angle))
+      translateY(calc(-1 * var(--radius)))
+      rotate(calc(-1 * var(--angle)))
+      scale(0.15);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.28s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    will-change: transform;
+  }
+
+  body.circle-menu-active .circle-node {
+    opacity: 1;
+    pointer-events: auto;
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--angle))
+      translateY(calc(-1 * var(--radius)))
+      rotate(calc(-1 * var(--angle)))
+      scale(1);
+  }
+
+  .circle-node a, .circle-node button {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: rgba(11, 28, 48, 0.96);
+    border: 1.5px solid rgba(56, 189, 248, 0.5);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    color: #fff; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+    text-decoration: none; padding: 0; position: relative;
+    transition: transform 0.2s ease, background 0.2s ease,
+                border-color 0.2s ease, color 0.2s ease;
+  }
+  .circle-node a .material-symbols-outlined,
+  .circle-node button .material-symbols-outlined {
+    font-size: 27px; color: var(--cyan);
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .circle-node.node-whatsapp a, .circle-node.node-whatsapp button {
+    background: rgba(37, 211, 102, 0.96);
+    border-color: #86efac; color: #062b13;
+  }
+  .circle-node.node-whatsapp .material-symbols-outlined { color: #062b13; }
+
+  .circle-node .node-label {
+    position: absolute;
+    left: 50%; top: calc(100% + 10px);
+    right: auto;
+    transform: translateX(-50%);
+    background: rgba(8, 20, 36, 0.94);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: #fff; font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.03em; padding: 6px 12px;
+    border-radius: 8px; white-space: nowrap;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s ease;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .circle-node:hover .node-label { opacity: 1; }
+    .circle-node:hover a, .circle-node:hover button {
+      transform: scale(1.12);
+      border-color: var(--cyan);
+      background: var(--blue-mid);
+      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.42);
+    }
+    .circle-node:hover .material-symbols-outlined { transform: scale(1.1); color: #fff; }
+    .circle-node.node-whatsapp:hover a {
+      background: var(--whatsapp-hover); color: #000; border-color: #fff;
+    }
+  }
+
+  /* Órbita maior = mais espaço entre os itens */
+  .circle-orbit-line {
+    position: absolute;
+    left: 32px; top: 32px;
+    width: 490px; height: 490px;
+    margin-left: -245px; margin-top: -205px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(56, 189, 248, 0.28);
+    pointer-events: none; opacity: 0;
+    transform: scale(0.55);
+    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1010;
+  }
+  body.circle-menu-active .circle-orbit-line {
+    opacity: 1; transform: scale(1);
+  }
+
+  .circle-menu-items.is-dragging,
+  .circle-menu-items.is-dragging .circle-node { cursor: grabbing; }
+  .circle-menu-items.is-dragging .circle-node,
+  .circle-menu-items.is-dragging .circle-node a {
+    transition: none !important;
+  }
+
+  .circle-rotate-hint {
+    position: absolute;
+    left: 32px; top: calc(100% + 18px);
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.72);
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.04em; white-space: nowrap;
+    pointer-events: none; opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  body.circle-menu-active .circle-rotate-hint { opacity: 1; }
+
+  @media (max-width: 768px) {
+    .circular-menu-hub { right: 20px; bottom: 20px; width: 58px; height: 58px; }
+    .circle-trigger { width: 58px; height: 58px; }
+    .circle-aura { width: 70px; height: 70px; }
+    .circle-menu-items { left: 29px; top: 29px; }
+    .circle-node { --radius: 155px; width: 68px; height: 68px; }
+    .circle-node a .material-symbols-outlined { font-size: 23px; }
+    .circle-orbit-line {
+      left: 29px; top: 29px;
+      width: 310px; height: 310px;
+      margin-left: -155px; margin-top: -155px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .circle-menu-hub, .circle-node, .circle-orbit-line,
+    .circle-trigger, .circle-trigger .material-symbols-outlined {
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ============================================================
+     SEÇÕES DO SITE
+     ============================================================ */
+  section.block { padding: 100px 0; position: relative; background: var(--black); }
+  .section-label {
+    display: inline-block; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase; color: var(--cyan);
+    margin-bottom: 14px; padding: 6px 14px;
+    border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 100px;
+    background: rgba(56, 189, 248, 0.05);
+  }
+  .section-title { color: #ffffff; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .section-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.7; max-width: 620px; }
+  .section-head { text-align: center; margin-bottom: 60px; }
+  .section-head .section-desc { margin: 0 auto; }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-radius: 24px;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+  }
+  .glass:hover {
+    transform: translateY(-6px);
+    border-color: rgba(56, 189, 248, 0.4);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 24px 60px -20px rgba(56, 189, 248, 0.35);
+  }
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; display: flex; align-items: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 140px 0 80px;
+  }
+  #hero .container { position: relative; z-index: 5; }
+  .hero__bg { position: absolute; left: 0; width: 100%; top: 0; height: 100%; }
+  #hero__bg4 { background-color: #ffffff; z-index: 1; }
+  #hero__bg3 { background-color: var(--cyan); z-index: 2; }
+  #hero__bg2 { background-color: var(--blue); z-index: 3; }
+  #hero__bg1 { background-color: var(--black); z-index: 4; }
+  .hero__el { will-change: transform, opacity; }
+
+  #hero h1 { color: #fff; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 20px; text-shadow: 0 4px 40px rgba(0, 35, 111, 0.5); }
+  #hero h1 .highlight {
+    background: linear-gradient(120deg, var(--cyan) 0%, var(--cyan-soft) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; display: inline-block;
+  }
+  #hero h2 { color: var(--text-muted); font-weight: 300; font-size: clamp(1rem, 2vw, 1.35rem); max-width: 680px; margin: 0 auto 32px; line-height: 1.6; }
+
+  .hero__actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 48px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 32px; border-radius: 100px;
+    font-weight: 700; font-size: 0.95rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    border: none; cursor: pointer; font-family: inherit;
+  }
+  .btn-primary { background: var(--whatsapp); color: #062b13; box-shadow: 0 12px 32px -8px rgba(37, 211, 102, 0.6); }
+  .btn-primary:hover { background: var(--whatsapp-hover); transform: translateY(-3px) scale(1.02); }
+  .btn-outline { background: rgba(255, 255, 255, 0.08); color: #fff; border: 1px solid rgba(255, 255, 255, 0.25); backdrop-filter: blur(10px); }
+  .btn-outline:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-3px); }
+  .btn .material-symbols-outlined { font-size: 20px; }
+
+  .hero__stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 620px; margin: 0 auto; }
+  .hero__stat {
+    background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px); border-radius: 16px; padding: 14px 10px; text-align: center;
+  }
+  .hero__stat strong { display: block; font-size: 1.3rem; font-weight: 800; color: var(--cyan); margin-bottom: 2px; }
+  .hero__stat span { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+
+  /* Métricas */
+  #metricas {
+    background: linear-gradient(135deg, var(--blue) 0%, #001a52 100%);
+    padding: 70px 0; position: relative; overflow: hidden;
+  }
+  #metricas::before {
+    content: ''; position: absolute; top: -50%; left: -10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.25), transparent 70%);
+    pointer-events: none;
+  }
+  .metrics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; position: relative; z-index: 2; }
+  @media (min-width: 768px) { .metrics-grid { grid-template-columns: repeat(4, 1fr); } }
+  .metric {
+    text-align: center; padding: 24px 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px; backdrop-filter: blur(12px);
+  }
+  .metric .material-symbols-outlined { font-size: 32px; color: var(--cyan); margin-bottom: 10px; }
+  .metric strong { display: block; font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .metric span { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+
+  /* Serviços */
+  .services-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 640px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .services-grid { grid-template-columns: repeat(4, 1fr); } }
+  .service-card { padding: 28px 24px; display: flex; flex-direction: column; justify-content: space-between; min-height: 280px; position: relative; overflow: hidden; }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--cyan), transparent);
+    transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--cyan); margin-bottom: 18px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .service-card:hover .service-icon { background: var(--cyan); color: var(--blue); }
+  .service-icon .material-symbols-outlined { font-size: 26px; }
+  .service-card h3 { color: #fff; margin-bottom: 10px; font-size: 1.15rem; }
+  .service-card p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; flex-grow: 1; }
+  .service-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+  .service-footer .tag { font-size: 0.72rem; font-weight: 700; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.08em; }
+  .service-arrow {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--cyan);
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  .service-card:hover .service-arrow { background: var(--cyan); color: var(--blue); transform: translateX(4px); }
+  .service-arrow .material-symbols-outlined { font-size: 18px; }
+
+  /* Marcas */
+  .brands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (min-width: 640px) { .brands-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1024px) { .brands-grid { grid-template-columns: repeat(6, 1fr); } }
+  .brand-card { padding: 22px 12px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .brand-icon {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--cyan);
+    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+  }
+  .brand-card:hover .brand-icon { transform: scale(1.1); background: var(--cyan); color: var(--blue); }
+  .brand-icon .material-symbols-outlined { font-size: 26px; }
+  .brand-card h4 { color: #fff; font-size: 1rem; }
+  .brand-card span { color: var(--text-muted); font-size: 0.72rem; letter-spacing: 0.05em; }
+
+  /* Como funciona */
+  .steps-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 768px) { .steps-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .steps-grid { grid-template-columns: repeat(5, 1fr); } }
+  .step-card { padding: 26px 22px; display: flex; flex-direction: column; justify-content: space-between; min-height: 240px; }
+  .step-num { font-size: 2.4rem; font-weight: 800; color: rgba(56, 189, 248, 0.25); margin-bottom: 12px; line-height: 1; }
+  .step-card h4 { color: #fff; margin-bottom: 8px; font-size: 1rem; }
+  .step-card p { color: var(--text-muted); font-size: 0.82rem; line-height: 1.55; flex-grow: 1; }
+  .step-card .tag { display: inline-block; margin-top: 16px; font-size: 0.7rem; font-weight: 700; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.1em; }
+  .step-card.featured { background: linear-gradient(135deg, var(--cyan) 0%, var(--blue-mid) 100%); border-color: transparent; }
+  .step-card.featured .step-num { color: rgba(255, 255, 255, 0.35); }
+  .step-card.featured h4 { color: #fff; }
+  .step-card.featured p { color: rgba(255, 255, 255, 0.85); }
+  .step-card.featured .tag { color: #fff; }
+
+  /* Antes e depois */
+  .before-after-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
+  @media (min-width: 1024px) { .before-after-grid { grid-template-columns: repeat(2, 1fr); } }
+  .ba-card { padding: 28px; display: flex; flex-direction: column; gap: 20px; }
+  .ba-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .ba-head h3 { color: #fff; font-size: 1.15rem; }
+  .ba-badge { background: rgba(56, 189, 248, 0.15); color: var(--cyan); font-size: 0.72rem; font-weight: 700; padding: 6px 12px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.08em; border: 1px solid rgba(56, 189, 248, 0.3); }
+  .ba-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .ba-img-wrapper { border-radius: 16px; overflow: hidden; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.06); position: relative; aspect-ratio: 1 / 1; }
+  .ba-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .ba-img-wrapper:hover img { transform: scale(1.06); }
+  .ba-label { position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 100px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; backdrop-filter: blur(6px); }
+  .ba-label.before { background: rgba(186, 26, 26, 0.85); color: #fff; }
+  .ba-label.after { background: rgba(37, 211, 102, 0.85); color: #062b13; }
+  .ba-caption { color: var(--text-muted); font-size: 0.85rem; text-align: center; margin-top: 6px; }
+  .ba-footer { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; }
+
+  /* Avaliações */
+  .reviews-grid { display: grid; grid-template-columns: 1fr; gap: 22px; }
+  @media (min-width: 1024px) { .reviews-grid { grid-template-columns: repeat(3, 1fr); } }
+  .review-card { padding: 28px; display: flex; flex-direction: column; justify-content: space-between; }
+  .stars { color: #fbbf24; margin-bottom: 14px; font-size: 1.1rem; letter-spacing: 2px; }
+  .review-text { color: #e5eeff; font-size: 0.92rem; line-height: 1.7; font-style: italic; flex-grow: 1; }
+  .review-author { display: flex; align-items: center; gap: 12px; margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+  .avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--blue-mid)); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.9rem; }
+  .review-author strong { color: #fff; font-size: 0.9rem; display: block; }
+  .review-author span { color: var(--text-muted); font-size: 0.75rem; }
+
+  /* Localização */
+  .location-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; }
+  @media (min-width: 1024px) { .location-grid { grid-template-columns: 5fr 7fr; } }
+  .location-info { display: flex; flex-direction: column; gap: 16px; }
+  .info-item { display: flex; gap: 14px; align-items: flex-start; padding: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; }
+  .info-icon { width: 42px; height: 42px; border-radius: 12px; background: var(--blue); display: flex; align-items: center; justify-content: center; color: var(--cyan); flex-shrink: 0; }
+  .info-icon.whats { background: var(--whatsapp); color: #062b13; }
+  .info-icon .material-symbols-outlined { font-size: 20px; }
+  .info-item strong { color: #fff; font-size: 0.9rem; display: block; margin-bottom: 2px; }
+  .info-item p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin: 0; }
+  .map-wrapper { border-radius: 24px; overflow: hidden; aspect-ratio: 16 / 10; background-size: cover; background-position: center; border: 1px solid rgba(56, 189, 248, 0.25); position: relative; box-shadow: 0 24px 60px -20px rgba(0, 35, 111, 0.6); }
+  .map-card { position: absolute; bottom: 18px; left: 18px; right: 18px; background: rgba(11, 28, 48, 0.9); backdrop-filter: blur(16px); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 16px; padding: 14px 18px; display: flex; align-items: center; gap: 12px; }
+  .map-card .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--whatsapp); box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.25); animation: pulse-dot 2s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%, 100% { box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.25); } 50% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); } }
+  .map-card strong { color: #fff; font-size: 0.9rem; display: block; }
+  .map-card span { color: var(--text-muted); font-size: 0.78rem; }
+
+  /* FAQ */
+  .faq-list { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; overflow: hidden; transition: border-color 0.3s ease, background 0.3s ease; }
+  .faq-item.open { border-color: rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.05); }
+  .faq-question { width: 100%; padding: 22px 24px; background: transparent; border: none; color: #fff; font-family: inherit; font-size: 1rem; font-weight: 700; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 16px; cursor: pointer; }
+  .faq-question .material-symbols-outlined { color: var(--cyan); transition: transform 0.3s ease; flex-shrink: 0; font-size: 24px; }
+  .faq-item.open .faq-question .material-symbols-outlined { transform: rotate(180deg); }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 24px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
+  .faq-item.open .faq-answer { max-height: 300px; padding: 0 24px 22px; }
+
+  /* CTA final */
+  #cta-final { padding: 120px 0; background: linear-gradient(135deg, var(--blue) 0%, #001a52 60%, var(--black) 100%); text-align: center; position: relative; overflow: hidden; }
+  #cta-final::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(56, 189, 248, 0.2), transparent 70%); pointer-events: none; }
+  #cta-final::after { content: ''; position: absolute; bottom: -100px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(37, 211, 102, 0.15), transparent 70%); pointer-events: none; }
+  #cta-final .container { position: relative; z-index: 2; }
+  #cta-final h2 { color: #fff; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto; }
+  #cta-final p { color: var(--text-muted); max-width: 620px; margin: 0 auto 36px; font-size: 1.05rem; line-height: 1.7; }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+  .cta-trust { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin-top: 40px; color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+  .cta-trust span { display: flex; align-items: center; gap: 6px; }
+  .cta-trust .material-symbols-outlined { color: var(--cyan); font-size: 16px; }
+
+  /* Footer */
+  footer { background: #050505; padding: 70px 0 30px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+  .footer-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 40px; }
+  @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.2fr; } }
+  .footer-brand h3 { color: #fff; font-size: 1.3rem; margin-bottom: 6px; }
+  .footer-brand .tagline { color: var(--cyan); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; display: block; margin-bottom: 16px; }
+  .footer-brand p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.7; }
+  .footer-col h4 { color: #fff; font-size: 1rem; margin-bottom: 16px; }
+  .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col li { color: var(--text-muted); font-size: 0.85rem; display: flex; align-items: flex-start; gap: 10px; }
+  .footer-col li .material-symbols-outlined { color: var(--cyan); font-size: 18px; flex-shrink: 0; }
+  .seal { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.15); border-radius: 12px; margin-bottom: 10px; }
+  .seal .material-symbols-outlined { color: var(--cyan); font-size: 22px; }
+  .seal strong { color: #fff; font-size: 0.82rem; display: block; }
+  .seal span { color: var(--text-muted); font-size: 0.72rem; }
+  .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255, 255, 255, 0.06); display: flex; flex-direction: column; gap: 14px; align-items: center; justify-content: space-between; color: var(--text-muted); font-size: 0.75rem; text-align: center; }
+  @media (min-width: 768px) { .footer-bottom { flex-direction: row; text-align: left; } }
+
+  /* Prefers reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- OVERLAY DO MENU CIRCULAR -->
+<div class="circle-menu-overlay" id="circleMenuOverlay" aria-hidden="true"></div>
+
+<!-- HEADER -->
+<header id="main-header" class="site-header">
+  <div class="site-header__inner">
+    <a href="#hero" class="site-brand" aria-label="A Casa do Celular — Início">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-K13MpUohSrJb9bC2L16NZa6n-ng8xiQy1wlYEtbvCHkMiWqiR1YtoffK2XhJLtBABOL04mFA-IsAP4mQFxXV9xAEZVacZDG-vwk-dm3_UjyByuU1uRXh-mhzPu3z1OwmQuyw6chS9Dy0dxLyCm-Ya2ZkZk49yaikepZNm83zr6TXQpUpTwsltBkTOhuPMWo6iGXGanVPpXp9vBvQ7OeoHTZFeRIkbna9zE4tu-UOJfY5V4oy72_1PF_6rCUx7-elSu4" alt="A Casa do Celular">
+    </a>
+
+    <nav class="site-nav" aria-label="Navegação principal">
+      <a href="#hero">Início</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#marcas">Marcas</a>
+      <a href="#como-funciona">Como Funciona</a>
+      <a href="#antes-depois">Antes &amp; Depois</a>
+      <a href="#avaliacoes">Avaliações</a>
+      <a href="#localizacao">Localização</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <div class="site-header__actions">
+      <a class="site-header__cta" href="https://wa.me/5512999990000?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer">
+        <span class="material-symbols-outlined" aria-hidden="true">chat</span>
+        <span>Orçamento Rápido</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     EXPANDING CIRCULAR MENU (RADIAL FAB)
+     ============================================================ -->
+<div class="circular-menu-hub" id="circleHub">
+  <!-- Pulso indicador quando fechado -->
+  <div class="circle-aura" aria-hidden="true"></div>
+
+  <!-- Arco de órbita decorativo pontilhado -->
+  <div class="circle-orbit-line" aria-hidden="true"></div>
+
+  <!-- Botão Central Gatilho que se expande -->
+  <button type="button" class="circle-trigger" id="circleTrigger" aria-label="Abrir menu circular interativo" aria-expanded="false" aria-controls="circleItemsList">
+    <div class="icon-box">
+      <span class="material-symbols-outlined icon-open" aria-hidden="true">apps</span>
+      <span class="material-symbols-outlined icon-close" aria-hidden="true">close</span>
+    </div>
+  </button>
+
+  <!-- Itens da roda: arraste com mouse ou dedo para girar -->
+  <ul class="circle-menu-items" id="circleItemsList" role="menu" aria-label="Menu circular">
+    <li class="circle-node" style="--index:0" role="none"><a href="#hero" role="menuitem" aria-label="Voltar ao início"><span class="material-symbols-outlined" aria-hidden="true">home</span><span class="node-label">Início</span></a></li>
+    <li class="circle-node" style="--index:1" role="none"><a href="#servicos" role="menuitem" aria-label="Ver serviços"><span class="material-symbols-outlined" aria-hidden="true">build</span><span class="node-label">Serviços</span></a></li>
+    <li class="circle-node" style="--index:2" role="none"><a href="#marcas" role="menuitem" aria-label="Marcas atendidas"><span class="material-symbols-outlined" aria-hidden="true">smartphone</span><span class="node-label">Marcas</span></a></li>
+    <li class="circle-node" style="--index:3" role="none"><a href="#como-funciona" role="menuitem" aria-label="Como funciona o reparo"><span class="material-symbols-outlined" aria-hidden="true">checklist</span><span class="node-label">Como Funciona</span></a></li>
+    <li class="circle-node" style="--index:4" role="none"><a href="#antes-depois" role="menuitem" aria-label="Antes e Depois dos reparos"><span class="material-symbols-outlined" aria-hidden="true">compare</span><span class="node-label">Antes &amp; Depois</span></a></li>
+    <li class="circle-node" style="--index:5" role="none"><a href="#avaliacoes" role="menuitem" aria-label="Avaliações dos clientes"><span class="material-symbols-outlined" aria-hidden="true">star</span><span class="node-label">Avaliações</span></a></li>
+    <li class="circle-node" style="--index:6" role="none"><a href="#localizacao" role="menuitem" aria-label="Nossa localização"><span class="material-symbols-outlined" aria-hidden="true">location_on</span><span class="node-label">Localização</span></a></li>
+    <li class="circle-node node-whatsapp" style="--index:7" role="none"><a href="https://wa.me/5512999990000?text=Ol%C3%A1!%20Quero%20falar%20com%20um%20t%C3%A9cnico." target="_blank" rel="noopener noreferrer" role="menuitem" aria-label="Chamar no WhatsApp"><span class="material-symbols-outlined" aria-hidden="true">chat</span><span class="node-label">WhatsApp Técnico</span></a></li>
+  </ul>
+  <div class="circle-rotate-hint" aria-hidden="true">Arraste para girar</div>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section id="hero">
+  <div id="hero__bg4" class="hero__bg"></div>
+  <div id="hero__bg3" class="hero__bg"></div>
+  <div id="hero__bg2" class="hero__bg"></div>
+  <div id="hero__bg1" class="hero__bg"></div>
+  <div class="container">
+    <div class="hero__el" style="margin-bottom: 24px;">
+      <span class="section-label">
+        <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle;" aria-hidden="true">verified</span>
+        Assistência Técnica em Caçapava-SP
+      </span>
+    </div>
+    <h1 class="hero__el">Seu celular quebrou?<br/><span class="highlight">A gente resolve.</span></h1>
+    <h2 class="hero__el">Diagnóstico transparente no ato, componentes homologados de alto padrão e bancada técnica com procedimentos antiestáticos certificados no centro da cidade.</h2>
+    <div class="hero__actions hero__el">
+      <a class="btn btn-primary" href="https://wa.me/5512999990000" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined" aria-hidden="true">chat</span>Solicitar Orçamento</a>
+      <a class="btn btn-outline" href="#servicos"><span class="material-symbols-outlined" aria-hidden="true">handyman</span>Ver Serviços</a>
+    </div>
+    <div class="hero__stats hero__el">
+      <div class="hero__stat"><strong>Até 40 min</strong><span>Reparo Expresso</span></div>
+      <div class="hero__stat"><strong>100% Grátis</strong><span>Diagnóstico</span></div>
+      <div class="hero__stat"><strong>Até 1 Ano</strong><span>Garantia</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MÉTRICAS -->
+<section id="metricas">
+  <div class="container">
+    <div class="metrics-grid">
+      <div class="metric reveal"><span class="material-symbols-outlined" aria-hidden="true">devices</span><strong>+5.000</strong><span>Aparelhos Reparados</span></div>
+      <div class="metric reveal"><span class="material-symbols-outlined" aria-hidden="true">timer</span><strong>Até 1h</strong><span>Reparo Balcão</span></div>
+      <div class="metric reveal"><span class="material-symbols-outlined" aria-hidden="true">security</span><strong>Até 1 Ano</strong><span>Garantia</span></div>
+      <div class="metric reveal"><span class="material-symbols-outlined" aria-hidden="true">price_check</span><strong>R$ 0,00</strong><span>Orçamento</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="block" id="servicos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Soluções Rápidas &amp; Precisas</span>
+      <h2 class="section-title">Serviços Mais Procurados</h2>
+      <p class="section-desc">Da tela estilhaçada ao reparo de micro-solda na placa lógica. Peças de primeira linha, calibração e testes prévios.</p>
+    </div>
+    <div class="services-grid">
+      <div class="glass service-card reveal"><div><div class="service-icon"><span class="material-symbols-outlined">screenshot</span></div><h3>Troca de Tela</h3><p>Vidro quebrado, touchscreen sem toque, manchas OLED e linhas verticais. Lamination e troca expressa com vedação.</p></div><div class="service-footer"><span class="tag">45 min</span><a class="service-arrow" href="https://wa.me/5512999990000?text=Preciso%20trocar%20a%20tela" aria-label="Solicitar troca de tela"><span class="material-symbols-outlined">arrow_forward</span></a></div></div>
+      <div class="glass service-card reveal"><div><div class="service-icon"><span class="material-symbols-outlined">battery_charging_full</span></div><h3>Troca de Bateria</h3><p>Descarregamento acelerado, celular reiniciando sozinho ou bateria estufada. Ciclo 100% novo com selagem.</p></div><div class="service-footer"><span class="tag">Saúde 100%</span><a class="service-arrow" href="https://wa.me/5512999990000?text=Quero%20trocar%20a%20bateria" aria-label="Solicitar troca de bateria"><span class="material-symbols-outlined">arrow_forward</span></a></div></div>
+      <div class="glass service-card reveal"><div><div class="service-icon"><span class="material-symbols-outlined">cable</span></div><h3>Conector de Carga</h3><p>Mau contato no cabo, conector USB-C ou Lightning solto, aparelho que não reconhece carregador rápido.</p></div><div class="service-footer"><span class="tag">Subplaca Original</span><a class="service-arrow" href="https://wa.me/5512999990000?text=N%C3%A3o%20est%C3%A1%20carregando" aria-label="Solicitar conector de carga"><span class="material-symbols-outlined">arrow_forward</span></a></div></div>
+      <div class="glass service-card reveal"><div><div class="service-icon"><span class="material-symbols-outlined">memory</span></div><h3>Reparo em Placa Mãe</h3><p>Aparelhos em curto, que não ligam, falhas de áudio (codec), perda de sinal de chip, Wi-Fi inativo.</p></div><div class="service-footer"><span class="tag">Bancada ESD</span><a class="service-arrow" href="https://wa.me/5512999990000?text=Reparo%20em%20placa%20m%C3%A3e" aria-label="Solicitar reparo de placa"><span class="material-symbols-outlined">arrow_forward</span></a></div></div>
+      <div class="glass service-card reveal"><div><div class="service-icon"><span class="material-symbols-outlined">system_update</span></div><h3>Software &amp; Desbloqueio</h3><p>Loop infinito na logo, travamentos, apps fechando, atualização de sistema com segurança e backup de dados.</p></div><div class="service-footer"><span class="tag">Sem perder fotos</span><a class="service-arrow" href="https://wa.me/5512999990000?text=Meu%20celular%20travou" aria-label="Solicitar software"><span class="material-symbols-outlined">arrow_forward</span></a></div></div>
+      <div class="glass service-card reveal"><div><div class="service-icon"><span class="material-symbols-outlined">photo_camera</span></div><h3>Câmeras &amp; Lentes</h3><p>Fotos embaçadas, estabilizador tremendo, vidro da lente riscado ou quebrado. Troca sem substituir o sensor.</p></div><div class="service-footer"><span class="tag">Foco Cristalino</span><a class="service-arrow" href="https://wa.me/5512999990000?text=Vidro%20da%20c%C3%A2mera%20quebrou" aria-label="Solicitar câmera"><span class="material-symbols-outlined">arrow_forward</span></a></div></div>
+      <div class="glass service-card reveal"><div><div class="service-icon"><span class="material-symbols-outlined">water_drop</span></div><h3>Limpeza &amp; Desoxidação</h3><p>Aparelho caiu na água, piscina ou pegou chuva. Banho ultrassônico em cuba isopropílica e recuperação de circuitos.</p></div><div class="service-footer"><span class="tag">Banho Químico</span><a class="service-arrow" href="https://wa.me/5512999990000?text=Caiu%20na%20%C3%A1gua" aria-label="Solicitar desoxidação"><span class="material-symbols-outlined">arrow_forward</span></a></div></div>
+      <div class="glass service-card reveal"><div><div class="service-icon"><span class="material-symbols-outlined">diamond</span></div><h3>Tampa &amp; Chassi</h3><p>Tampa traseira de vidro quebrada, carcaça empenada ou aro amassado após quedas. Restauração estética original.</p></div><div class="service-footer"><span class="tag">Laser de Remoção</span><a class="service-arrow" href="https://wa.me/5512999990000?text=Trocar%20tampa%20traseira" aria-label="Solicitar tampa traseira"><span class="material-symbols-outlined">arrow_forward</span></a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARCAS -->
+<section class="block" id="marcas" style="background: #050505;">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Ampla Cobertura Técnica</span>
+      <h2 class="section-title">Especialistas nas Principais Marcas</h2>
+      <p class="section-desc">Estoque local de componentes pronta entrega para os modelos mais usados.</p>
+    </div>
+    <div class="brands-grid">
+      <div class="glass brand-card reveal"><div class="brand-icon"><span class="material-symbols-outlined">ad_units</span></div><h4>Apple</h4><span>iPhone &amp; iPad</span></div>
+      <div class="glass brand-card reveal"><div class="brand-icon"><span class="material-symbols-outlined">smartphone</span></div><h4>Samsung</h4><span>Galaxy S, A, Z</span></div>
+      <div class="glass brand-card reveal"><div class="brand-icon"><span class="material-symbols-outlined">phone_android</span></div><h4>Motorola</h4><span>Moto G &amp; Edge</span></div>
+      <div class="glass brand-card reveal"><div class="brand-icon"><span class="material-symbols-outlined">bolt</span></div><h4>Xiaomi</h4><span>Redmi &amp; POCO</span></div>
+      <div class="glass brand-card reveal"><div class="brand-icon"><span class="material-symbols-outlined">mobile_friendly</span></div><h4>Realme</h4><span>Number &amp; GT</span></div>
+      <div class="glass brand-card reveal"><div class="brand-icon"><span class="material-symbols-outlined">devices_other</span></div><h4>Multimarcas</h4><span>LG, Asus, Positivo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="block" id="como-funciona">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Processo Ágil &amp; Sem Segredos</span>
+      <h2 class="section-title">Como Funciona Nosso Atendimento</h2>
+      <p class="section-desc">Você acompanha cada etapa. Nada de taxas surpresa ou reparos realizados sem seu consentimento prévio.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="glass step-card reveal"><div><div class="step-num">01</div><h4>Contato &amp; Triagem</h4><p>Envie mensagem no WhatsApp explicando os sintomas ou traga o celular direto na loja física em Caçapava.</p></div><span class="tag">Imediato</span></div>
+      <div class="glass step-card reveal"><div><div class="step-num">02</div><h4>Diagnóstico</h4><p>Conectamos seu aparelho a multímetros de precisão e fontes de bancada para encontrar o defeito exato.</p></div><span class="tag">100% Grátis</span></div>
+      <div class="glass step-card reveal"><div><div class="step-num">03</div><h4>Orçamento Claro</h4><p>Passamos o valor fechado, tipos de peças disponíveis e o prazo exato antes de qualquer serviço.</p></div><span class="tag">Sem Compromisso</span></div>
+      <div class="glass step-card reveal"><div><div class="step-num">04</div><h4>Reparo Técnico</h4><p>Com aprovação, o técnico opera na bancada isolada ESD com ferramentas térmicas e selagem de fábrica.</p></div><span class="tag">Bancada ESD</span></div>
+      <div class="step-card featured reveal"><div><div class="step-num">05</div><h4>Testes &amp; Entrega</h4><p>Checklist de 18 itens: toque, câmeras, biometria, áudio e carga. Celular pronto com termo de garantia.</p></div><span class="tag">Com Certificado</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ANTES E DEPOIS -->
+<section class="block" id="antes-depois" style="background: #050505;">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Resultado Comprovado</span>
+      <h2 class="section-title">Problema Resolvido. Celular Novo de Novo.</h2>
+      <p class="section-desc">Veja a precisão das nossas restaurações de tela e recuperação física em Caçapava.</p>
+    </div>
+    <div class="before-after-grid">
+      <div class="glass ba-card reveal">
+        <div class="ba-head"><h3>Troca de Display OLED + Aro</h3><span class="ba-badge">40 minutos</span></div>
+        <div class="ba-imgs">
+          <div><div class="ba-img-wrapper"><span class="ba-label before">Antes</span><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMAa9BLdrg8fVmc4CUs4PfmS_wxD1mVwsU94b4jgr7PO1M3JVamDVisrigDcmu883YBm9CLE9Y3fsb0xsGIT7Rtl12e8PPm_Dr7w3LPqvgA_evGuxtxe3PHoxHWIwlX2esZFaKeT-5p2D3aRRNfqWppM3nO_M-jdHgznwbjMex--W1B2qjGiTkmBHfYhDX_dXwoFbjBGZrzLR2tHLH4iIh2Xsyp6nayqm2UZIEFUApbbnQ_IE0-wQqsw" alt="Tela trincada"/></div><p class="ba-caption">Vidro trincado</p></div>
+          <div><div class="ba-img-wrapper"><span class="ba-label after">Depois</span><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdFFfQexDJaznxqfUYzhhaD7qpLfNgkZgyfzhTQPiDuIqCn7cJ8DbNiTxJZZf1kTPDlbvSdMpmn5VVzakBy382Ush6T28qBsxGWDybEISam0L338XOQAsARL6Txj2ogsRPIJTNSxpEXLRK2zz6fP8PtnJZ0QbzI9xESzG4iuRjvbyXqjqyS5LdheHurn2rCSKfl9WNVGr1eefOdjqROexY6j0PWgHWQNRjwQXOjH4X2HT50ryzMlaM9w" alt="Tela nova"/></div><p class="ba-caption">Tela impecável</p></div>
+        </div>
+        <p class="ba-footer">Cliente recuperou o aparelho com 100% da fidelidade de cor e touch idênticos ao original.</p>
+      </div>
+      <div class="glass ba-card reveal">
+        <div class="ba-head"><h3>Bateria Estufada &amp; Recuperação</h3><span class="ba-badge">30 minutos</span></div>
+        <div class="ba-imgs">
+          <div><div class="ba-img-wrapper"><span class="ba-label before">Antes</span><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGZoBV1MV42NmrUbuQ_dJi7AQWevbjxP6VM0uX_AHChfUTxM1WRa_ixy-JM7PqDeMLeyI6tBnzwpVo84m7c1m3MCcDjLVa8l_9lfv3sAiQsoR9-VqC57luQexjcgJ3yekOw4j3cXGR1owv9jhHa8DboqV2_1aLTq7ZIvTORVZuB9S0GHBW_5gHP30CEg_DMmgUSBaZ41l0GforFkAsrH8JqQLdDQtqWA-YhXOeZFnHgmIwb-mXTnvJ7Q" alt="Bateria estufada"/></div><p class="ba-caption">Bateria inchada</p></div>
+          <div><div class="ba-img-wrapper"><span class="ba-label after">Depois</span><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrNXp_-mvvh8iV3rSYYiPVu2yfIUqWLKkggNUnvYnlmZaNVkiobFHMS_4Z1zNuX2UkflWSj4LNbyQyqnAwgfZ4GrCQzRevaJdSGMV4h0vaea33KKVA5oZDZbrVgJaylKVTxcHxAgFzHjDU7VVz9EXIqZIuCU-z_vIgiMxV9Q0OB9Rb-VccKkizlwrIQAmwI3HxkKACuFygjZ49-0VtHrBUsbHUPbHi4cRuPPjhAUPOrJ-FczmD65vz3A" alt="Bateria nova"/></div><p class="ba-caption">Célula nova</p></div>
+        </div>
+        <p class="ba-footer">Aparelho selado com nova fita impermeabilizante e autonomia para mais de um dia inteiro.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVALIAÇÕES -->
+<section class="block" id="avaliacoes">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Avaliações Reais no Google</span>
+      <h2 class="section-title">O Que Diz Quem Já Consertou Conosco</h2>
+      <p class="section-desc">4.9 / 5 em mais de 280 recomendações em Caçapava.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="glass review-card reveal"><div><div class="stars">★★★★★</div><p class="review-text">"Fui com meu iPhone 13 com a tela toda preta depois de uma queda feia. Em 50 minutos trocaram a tela com um display de qualidade incrível e colocaram película de brinde. Atendimento nota 10!"</p></div><div class="review-author"><div class="avatar">RC</div><div><strong>Rodrigo Camargo</strong><span>Vera Cruz - Caçapava</span></div></div></div>
+      <div class="glass review-card reveal"><div><div class="stars">★★★★★</div><p class="review-text">"Meu Samsung não carregava de jeito nenhum. Em outra loja queriam condenar a placa, mas na Casa do Celular eles limparam e trocaram só a subplaca de carga. Honestidade e preço justo."</p></div><div class="review-author"><div class="avatar">MS</div><div><strong>Mariana Santos</strong><span>Centro - Caçapava</span></div></div></div>
+      <div class="glass review-card reveal"><div><div class="stars">★★★★★</div><p class="review-text">"Troca da bateria do Xiaomi Redmi Note 11 foi impecável. O aparelho durava só 3 horas ligado, agora dura o dia inteiro. Super recomendo a Casa do Celular pelo profissionalismo."</p></div><div class="review-author"><div class="avatar">FA</div><div><strong>Fernando Albuquerque</strong><span>Parque Maria Elmira - Caçapava</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALIZAÇÃO -->
+<section class="block" id="localizacao" style="background: #050505;">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Loja Física &amp; Ponto Central</span>
+      <h2 class="section-title">Visite Nossa Unidade em Caçapava-SP</h2>
+      <p class="section-desc">Laboratório equipado e com atendimento balcão para você tirar suas dúvidas diretamente com nossos técnicos.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info reveal">
+        <div class="info-item"><div class="info-icon"><span class="material-symbols-outlined">location_on</span></div><div><strong>Endereço Completo</strong><p>Rua Cel. Manoel Inocêncio, Centro – Caçapava/SP<br/>Próximo à Praça da Matriz</p></div></div>
+        <div class="info-item"><div class="info-icon"><span class="material-symbols-outlined">schedule</span></div><div><strong>Horário de Atendimento</strong><p>Segunda a Sexta: 08:30 às 18:30<br/>Sábado: 08:30 às 13:00</p></div></div>
+        <div class="info-item"><div class="info-icon whats"><span class="material-symbols-outlined">call</span></div><div><strong>Fale com a Bancada</strong><p>(12) 99999-0000 / (12) 3653-0000</p></div></div>
+        <div class="hero__actions" style="justify-content:flex-start; margin: 8px 0 0;">
+          <a class="btn btn-primary" href="https://maps.google.com/?q=Centro+Cacapava+SP" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined">directions</span>Traçar Rota</a>
+          <a class="btn btn-outline" href="https://wa.me/5512999990000" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined">chat</span>Avisar que Estou Indo</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="map-wrapper" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD71xbKxPb6BGYDBLxDOQXT_O1RI89SB65qcS52hZdTuoy6CQOPSOFW0ibJZzW1Jr0TLlYDrrkieHps0XDZPcICsRk_GDctFC3Fea6KRBvxf69gZAoEp2xo3cNYRWd86Xys_2ckiTx8mDE_G39sj1bZrfEBVUt75clsrhXslZxtaxEgAJkAcLs7Y-FBjmc-Q_2xjLsQSraMVBWiwZSlFNng-OpRt63_KJgAvQDlFnyEPFtkJu59hoh6nw');">
+          <div class="map-card"><span class="dot" aria-hidden="true"></span><div><strong>A Casa do Celular</strong><span>Centro Comercial de Caçapava — Aberto Agora</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="block" id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Tire Suas Dúvidas</span>
+      <h2 class="section-title">Perguntas Frequentes</h2>
+      <p class="section-desc">Transparência do começo ao fim do atendimento.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal"><button class="faq-question" aria-expanded="false">Quanto tempo demora a troca de tela ou bateria?<span class="material-symbols-outlined">expand_more</span></button><div class="faq-answer">Serviços mais comuns como troca de tela, troca de bateria ou conector de carga costumam levar entre 30 a 60 minutos quando temos a peça em estoque.</div></div>
+      <div class="faq-item reveal"><button class="faq-question" aria-expanded="false">Vocês oferecem garantia do conserto?<span class="material-symbols-outlined">expand_more</span></button><div class="faq-answer">Sim! Todos os nossos reparos contam com garantia legal documentada de 90 dias a até 1 ano (dependendo da linha de peça escolhida).</div></div>
+      <div class="faq-item reveal"><button class="faq-question" aria-expanded="false">Eu perco minhas fotos, conversas e arquivos durante o reparo?<span class="material-symbols-outlined">expand_more</span></button><div class="faq-answer">Em 95% dos reparos de hardware o celular NÃO precisa ser formatado e seus dados permanecem intactos. Apenas em restaurações de software com loop de boot é feita a formatação com seu aviso prévio.</div></div>
+      <div class="faq-item reveal"><button class="faq-question" aria-expanded="false">Cobram valor para fazer o diagnóstico do aparelho?<span class="material-symbols-outlined">expand_more</span></button><div class="faq-answer">Não! O diagnóstico inicial de bancada é totalmente sem custo. Você só paga se aprovar o orçamento prévio apresentado.</div></div>
+      <div class="faq-item reveal"><button class="faq-question" aria-expanded="false">Quais são as formas de pagamento aceitas?<span class="material-symbols-outlined">expand_more</span></button><div class="faq-answer">Aceitamos PIX, cartões de débito e crédito com parcelamento em até 12x, além de dinheiro em espécie.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <div class="container reveal">
+    <span class="section-label" style="margin-bottom:20px;">
+      <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle;" aria-hidden="true">bolt</span>
+      Resposta em menos de 5 minutos no horário comercial
+    </span>
+    <h2>Pronto para ter seu celular consertado hoje mesmo com garantia?</h2>
+    <p>Fale diretamente com nosso laboratório em Caçapava. Descreva o modelo do seu celular e receba a estimativa de valor em poucos instantes.</p>
+    <div class="cta-actions">
+      <a class="btn btn-primary" href="https://wa.me/5512999990000?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined">chat</span>Solicitar Orçamento</a>
+      <a class="btn btn-outline" href="tel:+5512999990000"><span class="material-symbols-outlined">call</span>(12) 99999-0000</a>
+    </div>
+    <div class="cta-trust">
+      <span><span class="material-symbols-outlined">check</span> Diagnóstico Grátis</span>
+      <span><span class="material-symbols-outlined">check</span> Peças Homologadas</span>
+      <span><span class="material-symbols-outlined">check</span> Parcelamento em 12x</span>
+      <span><span class="material-symbols-outlined">check</span> Centro de Caçapava-SP</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>A Casa do Celular</h3>
+        <span class="tagline">Especialistas Multimarcas</span>
+        <p>Assistência técnica de precisão em smartphones e tablets. Troca de vidros, displays originais, baterias e reparos avançados em placa mãe com garantia comprovada.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul>
+          <li><span class="material-symbols-outlined">call</span>(12) 99999-0000</li>
+          <li><span class="material-symbols-outlined">chat</span>WhatsApp Oficial</li>
+          <li><span class="material-symbols-outlined">mail</span>contato@casadocelularcacapava.com.br</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Unidade Caçapava</h4>
+        <ul>
+          <li><span class="material-symbols-outlined">location_on</span>Rua Cel. Manoel Inocêncio, Centro</li>
+          <li><span class="material-symbols-outlined">schedule</span>Seg-Sex: 08:30 às 18:30<br/>Sáb: 08:30 às 13:00</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Selos de Segurança</h4>
+        <div class="seal"><span class="material-symbols-outlined">verified_user</span><div><strong>Garantia de até 1 Ano</strong><span>Peças certificadas de alto padrão</span></div></div>
+        <div class="seal"><span class="material-symbols-outlined">precision_manufacturing</span><div><strong>Laboratório ESD</strong><span>Proteção eletrostática total</span></div></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 A Casa do Celular — Caçapava/SP. Todos os direitos reservados.</span>
+      <span>CNPJ: 00.000.000/0001-00</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ============================================================
+     1. MENU CIRCULAR INTERATIVO — DRAG / TOUCH / MOUSE
+     ============================================================ */
+  (function() {
+    const trigger = document.getElementById('circleTrigger');
+    const overlay = document.getElementById('circleMenuOverlay');
+    const hub = document.getElementById('circleHub');
+    const wheel = document.getElementById('circleItemsList');
+    const nodes = [...document.querySelectorAll('.circle-node')];
+
+    if (!trigger || !hub || !wheel || !nodes.length) return;
+
+    const step = 360 / nodes.length;
+    let rotation = -90;
+    let dragging = false;
+    let moved = false;
+    let startX = 0;
+    let startY = 0;
+    let lastPointerAngle = 0;
+
+    function setWheelRotation() {
+      nodes.forEach((node, index) => {
+        node.style.setProperty('--angle', `${rotation + index * step}deg`);
+      });
+    }
+
+    function openMenu() {
+      setWheelRotation();
+      document.body.classList.add('circle-menu-active');
+      trigger.setAttribute('aria-expanded', 'true');
+      trigger.setAttribute('aria-label', 'Fechar menu circular');
+    }
+
+    function closeMenu() {
+      document.body.classList.remove('circle-menu-active');
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.setAttribute('aria-label', 'Abrir menu circular');
+      dragging = false;
+      moved = false;
+      wheel.classList.remove('is-dragging');
+    }
+
+    function toggleMenu() {
+      if (document.body.classList.contains('circle-menu-active')) closeMenu();
+      else openMenu();
+    }
+
+    function pointerAngle(e) {
+      const rect = hub.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      return Math.atan2(e.clientY - cy, e.clientX - cx) * 180 / Math.PI;
+    }
+
+    function onPointerDown(e) {
+      if (!document.body.classList.contains('circle-menu-active')) return;
+      if (e.target.closest('.circle-trigger')) return;
+
+      dragging = true;
+      moved = false;
+      startX = e.clientX;
+      startY = e.clientY;
+      lastPointerAngle = pointerAngle(e);
+      wheel.classList.add('is-dragging');
+
+      if (wheel.setPointerCapture) {
+        try { wheel.setPointerCapture(e.pointerId); } catch (_) {}
+      }
+      e.preventDefault();
+    }
+
+    function onPointerMove(e) {
+      if (!dragging) return;
+
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (Math.hypot(dx, dy) > 7) moved = true;
+
+      const current = pointerAngle(e);
+      let delta = current - lastPointerAngle;
+      if (delta > 180) delta -= 360;
+      if (delta < -180) delta += 360;
+
+      if (Math.abs(delta) > 0.05) {
+        rotation += delta;
+        lastPointerAngle = current;
+        setWheelRotation();
+      }
+      e.preventDefault();
+    }
+
+    function onPointerUp(e) {
+      if (!dragging) return;
+      dragging = false;
+      wheel.classList.remove('is-dragging');
+      if (wheel.releasePointerCapture) {
+        try { wheel.releasePointerCapture(e.pointerId); } catch (_) {}
+      }
+      // O clique do link continua funcionando se o usuário não arrastou.
+      setTimeout(() => { moved = false; }, 80);
+    }
+
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    wheel.addEventListener('pointerdown', onPointerDown);
+    wheel.addEventListener('pointermove', onPointerMove);
+    wheel.addEventListener('pointerup', onPointerUp);
+    wheel.addEventListener('pointercancel', onPointerUp);
+
+    nodes.forEach(node => {
+      const link = node.querySelector('a');
+      if (!link) return;
+
+      link.addEventListener('click', (e) => {
+        // Se houve arraste, não trate o fim do arraste como clique.
+        if (moved) {
+          e.preventDefault();
+          e.stopPropagation();
+          moved = false;
+          return;
+        }
+
+        const href = link.getAttribute('href');
+
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeMenu();
+
+          const target = document.querySelector(href);
+          if (target) {
+            setTimeout(() => {
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 80);
+          }
+        }
+        // Links externos, como WhatsApp, seguem normalmente.
+      });
+    });
+
+    if (overlay) {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeMenu();
+      });
+    }
+
+    wheel.addEventListener('wheel', (e) => {
+      if (!document.body.classList.contains('circle-menu-active')) return;
+      rotation += (e.deltaY || e.deltaX) * 0.28;
+      setWheelRotation();
+      e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.body.classList.contains('circle-menu-active')) {
+        closeMenu();
+      }
+    });
+
+    setWheelRotation();
+  })();
+
+  /* ============================================================
+     2. HEADER SCROLL EFFECT
+     ============================================================ */
+  (function() {
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', () => {
+      if (header) {
+        header.classList.toggle('scrolled', window.scrollY > 40);
+      }
+    });
+  })();
+
+  /* ============================================================
+     3. FAQ ACCORDION
+     ============================================================ */
+  (function() {
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          const q = i.querySelector('.faq-question');
+          if (q) q.setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  })();
+
+  /* ============================================================
+     4. SCROLL REVEAL (IntersectionObserver)
+     ============================================================ */
+  (function() {
+    const reveals = document.querySelectorAll('.reveal');
+    if (!reveals.length) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  })();
+
+  /* ============================================================
+     5. SMOOTH SCROLL PARA LINKS DO CABEÇALHO
+     ============================================================ */
+  (function() {
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const targetId = a.getAttribute('href');
+        if (targetId && targetId !== '#') {
+          const target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+  })();
+</script>
+</body>
+</html>
